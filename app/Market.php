@@ -12,4 +12,13 @@ class Market extends Model
         'name',
         'description',
     ];
+
+    protected $hidden = [
+        'created_at',
+    ];
+
+    public static function getAllMarkets()
+    {
+        return self::all();
+    }
 }
