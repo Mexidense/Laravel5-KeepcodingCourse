@@ -8,10 +8,14 @@ use Carbon\Carbon;
 
 class MarketController extends Controller
 {
-    public function index()
+    public function index($status = 'all')
     {
-        $markets = Market::getAllMarkets();
-
-        dd($markets->last());       
+        if($status == 'active') {
+            $markets = Market::getActiveMarkets();
+        } else {
+            $markets = Market::getAllMarkets();
+        }
+        
+        dd($markets);  
     }
 }

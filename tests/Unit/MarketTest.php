@@ -23,4 +23,24 @@ class MarketTest extends TestCase
 
         $this->assertCount(1, $markets);
     }
+    public function testCreateInactiveMarket()
+    {
+        Market::create([
+            'name' => 'name1',
+            'description' => 'description1',
+            'active' => 1,
+        ]);
+
+        Market::create([
+            'name' => 'name2',
+            'description' => 'description2',
+            'active' => 0,
+        ]);
+        
+        $markets = Market::getAllMarkets();
+        $this->assertCount(2, $markets);
+
+        $activeMarkets = Market::getActiveMarkets();
+        $this->assertCount(1, $activeMarkets);
+    }
 }

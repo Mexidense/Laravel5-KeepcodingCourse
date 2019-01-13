@@ -11,6 +11,7 @@ class Market extends Model
     protected $fillable = [
         'name',
         'description',
+        'active',
     ];
 
     protected $hidden = [
@@ -20,5 +21,10 @@ class Market extends Model
     public static function getAllMarkets()
     {
         return self::all();
+    }
+
+    public static function getActiveMarkets()
+    {
+        return self::where('active', 1)->get();
     }
 }
