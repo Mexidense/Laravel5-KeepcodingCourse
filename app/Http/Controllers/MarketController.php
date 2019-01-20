@@ -16,6 +16,14 @@ class MarketController extends Controller
             $markets = Market::getAllMarkets();
         }
         
-        dd($markets);  
+        $data = [
+            'markets' => $markets,
+        ];
+        return view('markets.index', $data)->withTitle('Markets');  
+    }
+
+    public function create()
+    {
+        return view('markets.create');
     }
 }
