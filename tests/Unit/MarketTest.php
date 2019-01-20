@@ -57,4 +57,34 @@ class MarketTest extends TestCase
         $this->assertCount($activeMarketsAmount+1, $markets);
     }
 
+    public function testFailValidation()
+    {
+        $input = [];
+
+        $market = new Market();
+        
+        // Check that validator fails
+        $this->assertFalse($market->validate($input));
+        // Check all errors keys
+        $this->assertArrayHasKey('name', $market->errors->getMessages());
+        $this->assertArrayHasKey('description', $market->errors->getMessages());
+    }
+
+    public function testOkValidation()
+    {
+        $input = [
+            'name' => 'Chinese market',
+            'description' => 'Nice market',
+        ];
+        $market = new Market($input);
+
+        // Check that validator is ok
+        $check = $market->validate($input);
+        $this->assertTrue($check);
+
+        // Check if this markets is saved on db.
+        $market->save();
+        $activeMarkets = Market::getActiveMarkets();
+        $this->assertCount(1, $activeMarkets);
+    }
 }
