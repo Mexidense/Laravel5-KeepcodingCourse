@@ -46,4 +46,14 @@ class MarketController extends Controller
                 ->withErrors($market->errors);
         }
     }
+
+    public function show($id)
+    {
+        $market = Market::find($id);
+        $data = [
+            'market' => $market
+        ];
+        return view('markets.show', $data)
+                ->withTitle('Market detail');
+    }
 }
