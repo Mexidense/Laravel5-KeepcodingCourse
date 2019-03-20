@@ -54,7 +54,7 @@ class MarketTest extends TestCase
         $this->assertCount($activeMarketsAmount, $activeMarkets);
 
         $markets = Market::getAllMarkets();
-        $this->assertCount($activeMarketsAmount+1, $markets);
+        $this->assertCount(($activeMarketsAmount+1), $markets);
     }
 
     public function testFailValidation()
