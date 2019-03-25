@@ -31,7 +31,7 @@ class StockHistorical extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     /**
-     * @var array 
+     * @var array
      */
     protected $rules = [
         'stock_id' => 'required|integer',
