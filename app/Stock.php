@@ -25,11 +25,20 @@ class Stock extends Model
      */
     protected $hidden = ['created_at', 'updated_at'];
 
+    /**
+     * Return all stock with associated market
+     * @return Stock[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public static function getAllStocksAndMarkets()
     {
         return self::with('market')->get();
     }
 
+    /**
+     * Returns all stocks by market ID
+     * @param $marketID
+     * @return Stock[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public static function getAllStocksFromMarket($marketID)
     {
         return self::with(['market' => function ($query) {
@@ -37,6 +46,22 @@ class Stock extends Model
         }])->whereHas('market', function ($query) use ($marketID) {
             $query->where('id', $marketID);
         })->get();
+    }
+
+    /**
+     * Return stock ID from acronym stock
+     * @param $stock
+     * @return mixed|string
+     */
+    public static function getStockID($stock)
+    {
+        $output = '';
+
+        $stock = self::where('acronym', 'stock')->first();
+        if ($stock) {
+            $output = $stock->getKey();
+        }
+        return $output;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\HelperAlphavantage;
+use App\Stock;
 use Illuminate\Support\Facades\Config;
 
 class StockHistoricalController extends Controller
@@ -24,6 +25,8 @@ class StockHistoricalController extends Controller
         $smaProcessed6        = $this->getStockSMA($stock, 6);
         $smaProcessed70       = $this->getStockSMA($stock, 70);
         $smaProcessed200      = $this->getStockSMA($stock, 200);
+
+        $stockID = Stock::getStockID($stock);
     }
 
     private function getStockClosingValues($stock)
