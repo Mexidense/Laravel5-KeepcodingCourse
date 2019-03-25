@@ -15,6 +15,9 @@ class StockController extends Controller
     public function getStockFromMarket($marketID)
     {
         $stocks = Stock::getAllStocksFromMarket($marketID);
-        dd($stocks->toArray());
+        $data = [
+          'stocks' => $stocks,
+        ];
+        return view('stocks.index', $data)->withTitle('Stocks');
     }
 }
