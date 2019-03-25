@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Market;
 
+/**
+ * Class MarketController
+ * @package App\Http\Controllers
+ */
 class MarketController extends Controller
 {
     public function index($status = 'all')
@@ -55,5 +59,33 @@ class MarketController extends Controller
         ];
         return view('markets.show', $data)
                 ->withTitle('Market detail');
+    }
+
+    public function edit($id)
+    {
+        $market = Market::findOrFail($id);
+        $data = [
+            'market' => $market
+        ];
+        return view('markets.edit', $data)
+                ->withTitle('Market edit');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $market = Market::find($id);
+
+        $input = $request->all();
+        if ($market->validate($input)) {
+            $market->name = $request->name;
+            $market->description = $request->description;
+            $market->active = (bool) $request->active;
+            $market->save();
+
+            // Create message and redirect to markets landing page.
+            $request->session()->flash('status_message', 'Market edited');
+            return redirect('markets');
+        }
+        return back()->withInput($input)->withErrors($market->errors);
     }
 }
