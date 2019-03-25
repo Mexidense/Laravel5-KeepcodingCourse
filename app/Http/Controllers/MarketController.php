@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Market;
 
@@ -87,5 +88,22 @@ class MarketController extends Controller
             return redirect('markets');
         }
         return back()->withInput($input)->withErrors($market->errors);
+    }
+
+    public function destroy($id)
+    {
+        try{
+            $market = Market::findOrFail($id);
+            $market->delete();
+
+            $status_message = 'Market removed';
+        }
+        catch (ModelNotFoundException $exception) {
+            $status_message = 'Not market with that id';
+        }
+
+        \Session::flash('status_message', $status_message);
+
+        return redirect('markets');
     }
 }

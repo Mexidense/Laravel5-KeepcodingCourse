@@ -19,6 +19,7 @@
                         @endif
                         <form class='form-horizontal' action="{{ route('market.edit', $market->id) }}" method="post">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
                             <div class="form-group row">
                                 <label for="market-name" class="col-md-4 form-control-label">Nombre</label>
                                 <div class="col-md-6">

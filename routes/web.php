@@ -28,3 +28,5 @@ Route::post('market/create', 'MarketController@store')->name('market.create');
 
 Route::get('market/{id}/edit', 'MarketController@edit');
 Route::put('market/{id}/edit', 'MarketController@update')->name('market.edit');
+
+Route::delete('market/{id}', 'MarketController@destroy')->name('market.destroy');
