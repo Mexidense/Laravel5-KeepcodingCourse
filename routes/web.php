@@ -32,4 +32,4 @@ Route::put('market/{id}/edit', 'MarketController@update')->name('market.edit');
 Route::delete('market/{id}', 'MarketController@destroy')->name('market.destroy');
 
 
-Route::get('stocks', 'StockController@getAllStocks');
+Route::get('stocks-from-market/{marketID}', 'StockController@getStockFromMarket');
