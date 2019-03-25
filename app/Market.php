@@ -31,6 +31,7 @@ class Market extends Model
 
     protected $fillable = [
         'name',
+        'acronym',
         'description',
         'active',
     ];
@@ -42,6 +43,7 @@ class Market extends Model
 
     protected $rules = [
         'name' => 'required|max:255|min:5',
+        'acronym' => 'required|max:10',
         'description' => 'required|max:255',
         'active' => 'boolean',
     ];

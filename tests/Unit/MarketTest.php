@@ -73,7 +73,8 @@ class MarketTest extends TestCase
     public function testOkValidation()
     {
         $input = [
-            'name' => 'Chinese market',
+            'name'        => 'Chinese market',
+            'acronym'     => 'CH',
             'description' => 'Nice market',
         ];
         $market = new Market($input);
