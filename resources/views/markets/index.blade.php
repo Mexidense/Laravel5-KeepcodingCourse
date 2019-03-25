@@ -22,7 +22,7 @@
                                     <div class="float-right">
                                         <a href="/market/{{ $market->id }}" class="btn btn-info">Ver</a>
                                         <a href="/market/{{ $market->id }}/edit" class="btn btn-warning">Edit</a>
-                                        <form class="float-right" method="POST" action="{{ route('market.destroy', [$market->id]) }}">
+                                        <form class="float-right delete-button" method="POST" action="{{ route('market.destroy', [$market->id]) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button class="btn btn-danger" type="submit">Borrar</button>
