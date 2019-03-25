@@ -34,4 +34,5 @@ Route::delete('market/{id}', 'MarketController@destroy')->name('market.destroy')
 
 Route::get('stocks-from-market/{marketID}', 'StockController@getStockFromMarket');
 
-Route::resource('stock_historicals', 'StockHistoricalController', ['only' => ['index', 'create']]);
+//Route::resource('stock_historicals', 'StockHistoricalController', ['only' => ['index', 'create']]);
+Route::get('stock_historicals/{stock}/{method}', 'StockHistoricalController@index');
