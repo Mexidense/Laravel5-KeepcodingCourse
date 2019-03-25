@@ -25,11 +25,16 @@ class Stock extends Model
      */
     protected $hidden = ['created_at', 'updated_at'];
 
+    static public function getAllStocksAndMarkets()
+    {
+        return self::with('market')->get();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function market()
     {
-        return $this->belongsTo('App\Market');
+        return $this->belongsTo(Market::class);
     }
 }
