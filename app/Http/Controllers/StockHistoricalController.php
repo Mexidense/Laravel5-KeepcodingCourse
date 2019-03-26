@@ -46,6 +46,9 @@ class StockHistoricalController extends Controller
                     $stockHistoricalSaved = StockHistorical::create($input);
                     echo "\nSaved values of $stock from date: $date\n";
                 }
+                else {
+                    echo "\n$stockHistorical->errors\n";
+                }
             }
         }
     }
