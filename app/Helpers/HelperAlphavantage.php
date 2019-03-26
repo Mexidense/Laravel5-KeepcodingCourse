@@ -23,6 +23,11 @@ class HelperAlphavantage {
         ];
     }
 
+    /**
+     * Get call to API
+     * @param $params
+     * @return int|\Psr\Http\Message\StreamInterface|string|null
+     */
     public static function getJsonReply($params)
     {
         $result = null;
@@ -51,6 +56,12 @@ class HelperAlphavantage {
         return \json_decode(self::getJsonReply($params));
     }
 
+    /**
+     * Returns array with key value is date and data value is the stock value.
+     * @param $results
+     * @param bool $multipleValues
+     * @return array
+     */
     public static function processArray($results, $multipleValues = false): array
     {
         $formattedArray = [];
@@ -76,6 +87,11 @@ class HelperAlphavantage {
         return $formattedArray;
     }
 
+    /**
+     * Check if the day params is today.
+     * @param $stockDate
+     * @return bool
+     */
     public static function isToday($stockDate): bool
     {
         return $stockDate == Carbon::today()->toDateString();
