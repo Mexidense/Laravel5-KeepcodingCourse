@@ -26,7 +26,7 @@ class Stock extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     /**
-     * Return all stock with associated market
+     * Return all stock with associated marketç
      * @return Stock[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function getAllStocksAndMarkets()
@@ -57,9 +57,11 @@ class Stock extends Model
     {
         $output = '';
 
-        $stock = self::where('acronym', 'stock')->first();
-        if ($stock) {
-            $output = $stock->getKey();
+        $stock = str_replace('.MC', '', $stock);
+
+        $stockData = self::where('acronym', $stock)->first();
+        if ($stockData) {
+            $output = $stockData->getKey();
         }
         return $output;
     }

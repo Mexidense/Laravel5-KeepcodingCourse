@@ -51,7 +51,7 @@ class HelperAlphavantage {
         return \json_decode(self::getJsonReply($params));
     }
 
-    public static function processArray($results): array
+    public static function processArray($results, $multipleValues = false): array
     {
         $formattedArray = [];
         foreach ($results as $key => $result) {
@@ -60,8 +60,13 @@ class HelperAlphavantage {
                     foreach ($result as $date => $item) {
                         if (!self::isToday($date)) {
                             if (preg_match('/\d{4}-\d{2}-\d{2}$/', $date)) {
-                                $string = '4. close';
-                                $formattedArray[$date] = $item->{$string};
+                                if ($multipleValues) {
+                                    $string = '4. close';
+                                    $formattedArray[$date] = $item->{$string};
+                                }
+                                else {
+                                    $formattedArray[$date] = end($item);
+                                }
                             }
                         }
                     }

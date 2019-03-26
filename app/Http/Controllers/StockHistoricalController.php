@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HelperAlphavantage;
 use App\Stock;
+use App\StockHistorical;
 use Illuminate\Support\Facades\Config;
 
 class StockHistoricalController extends Controller
@@ -21,12 +22,32 @@ class StockHistoricalController extends Controller
     }
 
     public function saveStockHistorical($stock) {
+        $stockID = Stock::getStockID($stock);
+
         $stockValuesProcessed = $this->getStockClosingValues($stock);
         $smaProcessed6        = $this->getStockSMA($stock, 6);
         $smaProcessed70       = $this->getStockSMA($stock, 70);
         $smaProcessed200      = $this->getStockSMA($stock, 200);
 
-        $stockID = Stock::getStockID($stock);
+
+        if (is_array($stockValuesProcessed)) {
+            $stockHistorical = new StockHistorical();
+
+            foreach ($stockValuesProcessed as $date => $stockValue) {
+                $input = [
+                    'stock_id' => $stockID,
+                    'date'     => $date,
+                    'value'    => $stockValue,
+                    'avg_6'    => $smaProcessed6[$date],
+                    'avg_70'   => $smaProcessed70[$date],
+                    'avg_200'  => $smaProcessed200[$date],
+                ];
+                if ($stockHistorical->validate($input)) {
+                    $stockHistoricalSaved = StockHistorical::create($input);
+                    echo "\nSaved values of $stock from date: $date\n";
+                }
+            }
+        }
     }
 
     private function getStockClosingValues($stock)
@@ -38,7 +59,7 @@ class StockHistoricalController extends Controller
         ];
 
         $stockValues = HelperAlphavantage::getArrayReply($params);
-        return HelperAlphavantage::processArray($stockValues);
+        return HelperAlphavantage::processArray($stockValues, true);
     }
 
     private function getStockSMA($stock, $smaPeriod)
