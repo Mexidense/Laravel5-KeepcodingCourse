@@ -20,7 +20,6 @@ class IbexSeeder extends Seeder
         $market_id = $market->getKey();
 
         $stocks = [
-            'ABE'  => 'Abertis',
             'ANA'  => 'Acciona',
             'ACX'  => 'Acerinox',
             'ACS'  => 'ACS',
