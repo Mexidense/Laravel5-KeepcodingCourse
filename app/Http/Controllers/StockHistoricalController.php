@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\HelperAlphavantage;
 use App\Stock;
 use App\StockHistorical;
+use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Support\Facades\Config;
 
 class StockHistoricalController extends Controller
@@ -44,10 +45,12 @@ class StockHistoricalController extends Controller
                 ];
                 if ($stockHistorical->validate($input)) {
                     $stockHistoricalSaved = StockHistorical::create($input);
-                    echo "\nSaved values of $stock from date: $date\n";
+                    echo "<br/>";
+                    Debugbar::info('Saved values of ' . $stock . 'from date: ' . $date);
                 }
                 else {
-                    echo "\n$stockHistorical->errors\n";
+                    echo "<br/>";
+                    Debugbar::warning($stockHistorical->errors);
                 }
             }
         }

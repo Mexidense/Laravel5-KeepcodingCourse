@@ -34,9 +34,9 @@ class StockHistorical extends Model
      * @var array
      */
     protected $rules = [
-        'stock_id' => 'required|integer',
+        'stock_id' => 'required|integer|unique_with:stock_historicals,date',
         'date'     => 'required|date_format:Y-m-d',
-        'value'    => 'required|numeric|unique_with:stock_historicals,date,value',
+        'value'    => 'required|numeric',
         'avg_6'    => 'required|numeric',
         'avg_70'   => 'required|numeric',
         'avg_200'  => 'required|numeric',
