@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\HelperAlphavantage;
+use App\Helpers\HelperChart;
 use App\Stock;
 use App\StockHistorical;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Support\Facades\Config;
-use Khill\Lavacharts\Exceptions\InvalidColumnType;
-use Khill\Lavacharts\Exceptions\InvalidLabel;
-use Khill\Lavacharts\Exceptions\LavaException;
-use Khill\Lavacharts\Lavacharts;
 
 class StockHistoricalController extends Controller
 {
@@ -60,45 +57,26 @@ class StockHistoricalController extends Controller
         }
     }
 
-    public function stockHistoricalGraph($stockID) {
-        $lava = new Lavacharts();
+    public function stockHistoricalGraph($stockID)
+    {
+        echo HelperChart::generateStockChart($stockID);
+    }
 
-        $data = $lava->DataTable();
+    public function stockHistoricalInfo($stockID)
+    {
+        $stockData = Stock::find($stockID);
+        $stockName = $stockData->name;
+        $stockHistorical = StockHistorical::getStockHistorical($stockID);
+        $stockChart = HelperChart::generateStockChart($stockID);
 
-        try {
-            $data->addDateColumn('Day of Month')
-                ->addNumberColumn('Value')
-                ->addNumberColumn('SMA 6')
-                ->addNumberColumn('SMA 70')
-                ->addNumberColumn('SMA 200');
-        } catch (LavaException $exception) {
-            Debugbar::error($exception->getMessage());
-        }
+        $data = [
+            'stockData' => $stockData,
+            'stockHistorical' => $stockHistorical,
+            'stockChart' => $stockChart,
+        ];
 
-        $stockValues = StockHistorical::where('stock_id', $stockID)->get();
-        foreach ($stockValues as $stockValue) {
-            $data->addRow([
-                $stockValue->date,
-                $stockValue->value,
-                $stockValue->avg_6,
-                $stockValue->avg_70,
-                $stockValue->avg_200,
-            ]);
-        }
-
-        $lava->LineChart('StockPrices', $data, [
-            'titleTextStyle' => [
-                'fontName'  => 'Verdana',
-                'fontColor' => 'blue',
-            ],
-            'title'          => 'Graph cuts ' . Stock::getStockName($stockID),
-            'legend'         => [
-                'position' => 'bottom',
-            ],
-        ]);
-
-        echo "<div id='stocks-chart'></div>";
-        echo $lava->render('LineChart', 'StockPrices', 'stocks-chart');
+        return view('stock_historicals.index', $data)
+            ->withTitle('Historical ' . $stockName);
     }
 
     private function getStockClosingValues($stock)

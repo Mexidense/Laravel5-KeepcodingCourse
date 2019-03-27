@@ -38,3 +38,4 @@ Route::get('stock_historicals/{stock}/{method}', 'StockHistoricalController@inde
 Route::get('stock_historicals/{stock}', 'StockHistoricalController@saveStockHistorical');
 
 Route::get('stock_historicals_chart/{stockID}', 'StockHistoricalController@stockHistoricalGraph');
+Route::get('stock_historical/{stockID}', 'StockHistoricalController@stockHistoricalInfo');

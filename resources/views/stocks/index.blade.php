@@ -15,7 +15,9 @@
                                         {{ $stock->id }} - {{ $stock->name }} - {{ $stock->acronym }}
                                     </div>
                                     <div class="col-lg-6 col-xs-6">
-
+                                        <div class="btn-group">
+                                            <a href="/stock_historical/{{ $stock->id }}" class="btn btn-success">View graph</a>
+                                        </div>
                                     </div>
                                 </li>
                             @endforeach
