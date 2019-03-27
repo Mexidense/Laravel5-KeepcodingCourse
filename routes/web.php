@@ -36,3 +36,5 @@ Route::get('stocks-from-market/{marketID}', 'StockController@getStockFromMarket'
 
 Route::get('stock_historicals/{stock}/{method}', 'StockHistoricalController@index');
 Route::get('stock_historicals/{stock}', 'StockHistoricalController@saveStockHistorical');
+
+Route::get('stock_historicals_chart/{stockID}', 'StockHistoricalController@stockHistoricalGraph');

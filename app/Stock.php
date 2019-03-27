@@ -67,6 +67,20 @@ class Stock extends Model
     }
 
     /**
+     * Returns Stock name by Stock ID
+     * @param $stockID
+     * @return mixed|string
+     */
+    public static function getStockName($stockID)
+    {
+        $stock = self::where('id', $stockID)->first();
+        if ($stock) {
+            return  $stock->name;
+        }
+        return '';
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function market()
