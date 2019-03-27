@@ -46,8 +46,8 @@ class StockHistoricalController extends Controller
                 ];
                 if ($stockHistorical->validate($input)) {
                     $stockHistoricalSaved = StockHistorical::create($input);
-                    echo "<br/>";
-                    Debugbar::info('Saved values of ' . $stock . 'from date: ' . $date);
+                    echo "\nSaved values of $stock from date: $date\n";
+                    //Debugbar::info('Saved values of ' . $stock . 'from date: ' . $date);
                 }
                 else {
                     echo "<br/>";

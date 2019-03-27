@@ -52,6 +52,7 @@ class RetrieveStockData extends Command
             if (!StockHistorical::isSavedStockHistorical($stock->id)) {
                 echo "\ncronLog: " . date('d/m/Y H:i;s', time());
                 echo "\nRetreiving " . $stock->acronym . "...\n";
+
                 $this->stockHistoricals->saveStockHistorical($stock->acronym);
             }
         }
