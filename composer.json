@@ -14,6 +14,7 @@
         "felixkiss/uniquewith-validator": "^3.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
+        "khill/lavacharts": "^3.1",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0"
     },
