@@ -40,9 +40,9 @@ class StockHistoricalController extends Controller
                     'stock_id' => $stockID,
                     'date'     => $date,
                     'value'    => $stockValue,
-                    'avg_6'    => $smaProcessed6[$date],
-                    'avg_70'   => $smaProcessed70[$date],
-                    'avg_200'  => $smaProcessed200[$date],
+                    'avg_6'    => isset($smaProcessed6[$date])?:0.0,
+                    'avg_70'   => isset($smaProcessed70[$date])?:0.0,
+                    'avg_200'  => isset($smaProcessed200[$date])?:0.0,
                 ];
                 if ($stockHistorical->validate($input)) {
                     $stockHistoricalSaved = StockHistorical::create($input);
