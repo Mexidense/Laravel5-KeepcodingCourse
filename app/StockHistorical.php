@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ValidatorTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -57,6 +58,13 @@ class StockHistorical extends Model
         }
 
         return $query->orderBy('date', 'DESC')->get();
+    }
+
+    public static function isSavedStockHistorical($stockID): bool
+    {
+        return (bool) self::where('stock_id', $stockID)
+            ->whereDate('created_at', Carbon::now()->toDateString())
+            ->count();
     }
 
     /**

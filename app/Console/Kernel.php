@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\RetrieveStockData',
     ];
 
     /**
@@ -24,8 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $filePath = storage_path('logs/crontab.log');
+        $schedule->command('historicals:data')
+            ->dailyAt('18:00')
+            ->sendOutputTo($filePath);
     }
 
     /**
