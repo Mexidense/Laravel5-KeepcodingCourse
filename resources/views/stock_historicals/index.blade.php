@@ -7,7 +7,12 @@
                 <div class="card">
                     <div class="card-header">{{ $title ?? 'Stock historicals' }}</div>
                     <div class="card-body">
-                        <table class="table">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                {!! $stockChart !!}
+                            </div>
+                        </div>
+                        <table class="table text-center">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -20,7 +25,7 @@
                             <tbody>
                                 @foreach($stockHistorical as $stockHistItem)
                                     <tr>
-                                        <th>{{ $stockHistItem->date}}</th>
+                                        <th>{{ $stockHistItem->date->format('d/m/y')}}</th>
                                         <th>{{ $stockHistItem->value}}</th>
                                         <th>{{ $stockHistItem->avg_6}}</th>
                                         <th>{{ $stockHistItem->avg_70}}</th>

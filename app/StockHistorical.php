@@ -42,6 +42,8 @@ class StockHistorical extends Model
         'avg_200'  => 'required|numeric',
     ];
 
+    protected $dates = ['date'];
+
     public static function getStockHistorical($stockID, $startDate = null, $endDate = null)
     {
         $query = self::where('stock_id', $stockID);
