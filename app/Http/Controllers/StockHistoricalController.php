@@ -31,6 +31,14 @@ class StockHistoricalController extends Controller
         $smaProcessed70       = $this->getStockSMA($stock, 70);
         $smaProcessed200      = $this->getStockSMA($stock, 200);
 
+        if (sizeof($stockValuesProcessed) > 0 &&
+            sizeof($smaProcessed6) > 0 &&
+            sizeof($smaProcessed70) > 0 &&
+            sizeof($smaProcessed200) > 0) {
+            return "Call to API fail: Thank you for using Alpha Vantage! 
+            \nOur standard API call frequency is 5 calls per minute and 500 calls per day.";
+        }
+
 
         if (is_array($stockValuesProcessed)) {
             $stockHistorical = new StockHistorical();
@@ -40,12 +48,12 @@ class StockHistoricalController extends Controller
                     'stock_id' => $stockID,
                     'date'     => $date,
                     'value'    => $stockValue,
-                    'avg_6'    => isset($smaProcessed6[$date])?:0.0,
-                    'avg_70'   => isset($smaProcessed70[$date])?:0.0,
-                    'avg_200'  => isset($smaProcessed200[$date])?:0.0,
+                    'avg_6'    => $smaProcessed6[$date],
+                    'avg_70'   => $smaProcessed70[$date],
+                    'avg_200'  => $smaProcessed200[$date],
                 ];
                 if ($stockHistorical->validate($input)) {
-                    $stockHistoricalSaved = StockHistorical::create($input);
+                    StockHistorical::create($input);
                     echo "\nSaved values of $stock from date: $date\n";
                     //Debugbar::info('Saved values of ' . $stock . 'from date: ' . $date);
                 }
