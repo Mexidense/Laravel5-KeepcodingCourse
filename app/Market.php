@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Market whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Market whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $acronym
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Market whereAcronym($value)
  */
 class Market extends Model
 {

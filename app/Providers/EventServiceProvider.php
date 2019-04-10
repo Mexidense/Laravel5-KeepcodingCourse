@@ -18,6 +18,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\Intersections' => [
+            'App\Listeners\IntersectionsListener'
+        ]
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\IntersectionsListener',
     ];
 
     /**

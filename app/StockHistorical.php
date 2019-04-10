@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\StockHistorical
+ *
  * @property int $id
  * @property int $stock_id
  * @property string $date
@@ -17,6 +19,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Stock $stock
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereAvg200($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereAvg6($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereAvg70($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereStockId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StockHistorical whereValue($value)
+ * @mixin \Eloquent
  */
 class StockHistorical extends Model
 {

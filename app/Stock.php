@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\Stock
+ *
  * @property int $id
  * @property int $market_id
  * @property string $name
@@ -12,6 +14,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Market $market
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereAcronym($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereMarketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Stock whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Stock extends Model
 {
