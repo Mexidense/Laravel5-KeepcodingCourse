@@ -43,3 +43,7 @@ Route::get('stock_historical/{stockID}', 'StockHistoricalController@stockHistori
 Route::get('stock_historical/{stockID}/intersect', function() {
 
 });
+
+
+Route::post('user_stocks', 'UserStocksController@store')->name('user_stocks.store');
+Route::delete('user_stocks', 'UserStocksController@destroy')->name('user_stocks.destroy');
