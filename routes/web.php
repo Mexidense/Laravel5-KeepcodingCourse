@@ -39,3 +39,7 @@ Route::get('stock_historicals/{stock}', 'StockHistoricalController@saveStockHist
 
 Route::get('stock_historicals_chart/{stockID}', 'StockHistoricalController@stockHistoricalGraph');
 Route::get('stock_historical/{stockID}', 'StockHistoricalController@stockHistoricalInfo');
+
+Route::get('stock_historical/{stockID}/intersect', function() {
+
+});

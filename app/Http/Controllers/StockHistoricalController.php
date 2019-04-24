@@ -53,8 +53,12 @@ class StockHistoricalController extends Controller
                     'avg_200'  => $smaProcessed200[$date],
                 ];
                 if ($stockHistorical->validate($input)) {
-                    StockHistorical::create($input);
+                    $stockHistoricalSaved = StockHistorical::create($input);
                     echo "\nSaved values of $stock from date: $date\n";
+
+                    if (HelperAlphavantage::isToday($date)) {
+                        event('App\Events\Intersection', $stockHistoricalSaved);
+                    }
                     //Debugbar::info('Saved values of ' . $stock . 'from date: ' . $date);
                 }
                 else {
